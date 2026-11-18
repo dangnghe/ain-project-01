@@ -25,20 +25,14 @@ from pathlib import Path
 from typing import Callable, Deque, Dict, Iterable, List, Optional, Set, Tuple
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from graph import Edge, Graph  # noqa: E402
+from graph import Edge, Graph  
 
-# (path of node ids from start to goal inclusive, or None) and the number of
-# nodes expanded while searching.
 PathResult = Tuple[Optional[List[str]], int]
 
 Heuristic = Callable[[Graph, str, str], float]
 
 BlockedEdges = Optional[Iterable[Iterable[str]]]
 
-
-# ---------------------------------------------------------------------------
-# Shared helpers
-# ---------------------------------------------------------------------------
 
 
 def _normalize_edge_pair(edge_a: str, edge_b: str) -> Tuple[str, str]:
@@ -148,10 +142,6 @@ def path_cost(
     return total
 
 
-# ---------------------------------------------------------------------------
-# Heuristics
-# ---------------------------------------------------------------------------
-
 
 def euclidean_heuristic(graph: Graph, node_id: str, goal_id: str) -> float:
     """Straight-line distance between two nodes in schematic units."""
@@ -221,10 +211,6 @@ def make_heuristic(
     scaled.__name__ = f"{key}_scaled"
     return scaled
 
-
-# ---------------------------------------------------------------------------
-# Search algorithms
-# ---------------------------------------------------------------------------
 
 
 def bfs(
