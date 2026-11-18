@@ -12,8 +12,8 @@ from pathlib import Path
 import streamlit as st
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from graph import load_graph, load_scenarios  # noqa: E402
-import student_core  # noqa: E402
+from graph import load_graph, load_scenarios  
+import student_core 
 
 st.set_page_config(page_title="Smart Campus Route Planner — starter", layout="wide")
 st.title("Smart Campus Route Planner — starter")
