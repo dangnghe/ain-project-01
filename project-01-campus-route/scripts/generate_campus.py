@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+
 """Generate Hanoi University (HANU) Campus Route Planner data (Project 01).
 
 Based on the official HANU Campus Wayfinding Map and 3D schematic diagram:
@@ -43,12 +43,8 @@ EDGE_FIELDS = [
     "accessible",
 ]
 
-# ---------------------------------------------------------------------------
-# HANU Campus Master Nodes Definition
-# ---------------------------------------------------------------------------
 
 HANU_NODES_SPEC = [
-    # Cổng & Khu Phía Đông (Gate & East)
     ("N_GATE", "Cổng Chính HANU (Nguyễn Trãi)", 575.0, 196.0, 0, "Campus Grounds", "plaza"),
     ("N_SOUVENIR", "Cửa Hàng HANU Souvenir", 550.0, 125.0, 1, "HANU Souvenir", "room"),
     ("N_B_ENTRANCE", "Sảnh Nhà B", 530.0, 250.0, 1, "Nhà B", "entrance"),
@@ -61,7 +57,6 @@ HANU_NODES_SPEC = [
     ("N_A_ENTRANCE", "Sảnh Nhà A", 412.0, 230.0, 1, "Nhà A", "entrance"),
     ("N_A_101", "Phòng Học A.101", 412.0, 305.0, 1, "Nhà A", "room"),
 
-    # Khu D1, D2, D3 & Tòa Nhà C (Khoa CNTT)
     ("N_D1_ENTRANCE", "Sảnh Nhà D1", 515.0, 175.0, 1, "Nhà D1", "entrance"),
     ("N_D1_101", "Phòng D1.101", 515.0, 105.0, 1, "Nhà D1", "room"),
     ("N_D2_ENTRANCE", "Sảnh Nhà D2", 475.0, 175.0, 1, "Nhà D2", "entrance"),
@@ -73,7 +68,6 @@ HANU_NODES_SPEC = [
     ("N_C_201", "Phòng Lab & Server C.201", 520.0, 38.0, 2, "Nhà C", "room"),
     ("N_C_ATTIC", "Phòng Gác Mái Kỹ Thuật Nhà C", 482.0, 24.0, 3, "Nhà C", "room"),
 
-    # Sân Vận Động & Trung Tâm
     ("N_STADIUM_EAST", "Khán Đài Đông Sân Vận Động", 360.0, 282.0, 0, "HANU Stadium", "plaza"),
     ("N_STADIUM_WEST", "Khán Đài Tây Sân Vận Động", 190.0, 282.0, 0, "HANU Stadium", "plaza"),
     ("N_STADIUM_PITCH", "Sân Cỏ & Đường Chạy", 275.0, 282.0, 0, "HANU Stadium", "plaza"),
@@ -83,8 +77,7 @@ HANU_NODES_SPEC = [
     ("N_LIB_201", "Phòng Đa Phương Tiện Thư Viện", 375.0, 100.0, 2, "Thư Viện", "room"),
     ("N_E_ENTRANCE", "Sảnh Nhà E", 355.0, 68.0, 1, "Nhà E", "entrance"),
     ("N_E_101", "Giảng Đường E.101", 355.0, 42.0, 1, "Nhà E", "room"),
-
-    # Cụm D4, D5, D6 & Bãi Đỗ Xe D4
+  
     ("N_D4_ENTRANCE", "Sảnh Nhà D4", 255.0, 175.0, 1, "Nhà D4", "entrance"),
     ("N_D4_101", "Phòng D4.101", 255.0, 115.0, 1, "Nhà D4", "room"),
     ("N_D4_PARKING", "Bãi Đỗ Xe D4", 205.0, 140.0, 0, "Campus Grounds", "plaza"),
@@ -93,7 +86,7 @@ HANU_NODES_SPEC = [
     ("N_D6_ENTRANCE", "Sảnh Nhà D6", 205.0, 75.0, 1, "Nhà D6", "entrance"),
     ("N_D6_101", "Phòng D6.101", 175.0, 45.0, 1, "Nhà D6", "room"),
 
-    # Căn Tin & Khu Phía Tây (D7)
+
     ("N_CANTEEN_ENTRANCE", "Sảnh Căn Tin", 140.0, 280.0, 1, "Căn Tin", "entrance"),
     ("N_CANTEEN_HALL", "Khu Ẩm Thực Căn Tin", 115.0, 255.0, 1, "Căn Tin", "room"),
     ("N_D7_ENTRANCE", "Sảnh Ký Túc Xá D7", 65.0, 215.0, 1, "Ký Túc Xá D7", "entrance"),
@@ -101,7 +94,6 @@ HANU_NODES_SPEC = [
     ("N_D7_GROCERY", "Cửa Hàng Tạp Hóa D7", 40.0, 325.0, 1, "Dịch Vụ D7", "room"),
     ("N_D7_PARKING", "Bãi Đỗ Xe D7", 60.0, 60.0, 0, "Campus Grounds", "plaza"),
 
-    # Trục Đường & Điểm Giao Cắt (Walkway & Road Waypoints)
     ("W_A_B", "Trục Đường Trước Nhà B & Sân Vườn A1", 480.0, 196.0, 0, "Campus Grounds", "hallway"),
     ("W_CROSS_EAST", "Ngã Tư Trung Tâm Phía Đông", 375.0, 196.0, 0, "Campus Grounds", "hallway"),
     ("W_SOUTH_STADIUM", "Trục Đường Nam Sân Vận Động", 275.0, 196.0, 0, "Campus Grounds", "hallway"),
@@ -115,26 +107,22 @@ HANU_NODES_SPEC = [
     ("W_SOUTH_CENTRAL", "Lối Đi Thư Viện - Giảng Đường D", 295.0, 100.0, 0, "Campus Grounds", "hallway"),
 ]
 
-# ---------------------------------------------------------------------------
-# HANU Campus Master Edges Definition
-# ---------------------------------------------------------------------------
 
 HANU_EDGES_SPEC = [
-    # 1. Trục Đường Chính Đông - Tây (Main East-West Spine)
+
     ("N_GATE", "W_A_B", "high", False, False, True),
     ("W_A_B", "W_CROSS_EAST", "medium", False, False, True),
     ("W_CROSS_EAST", "W_SOUTH_STADIUM", "medium", False, False, True),
     ("W_SOUTH_STADIUM", "W_CROSS_WEST", "medium", False, False, True),
     ("W_CROSS_WEST", "W_WEST_ALLEY", "medium", False, False, True),
 
-    # 2. Vành Đai Bắc Sân Vận Động (North Stadium Loop)
+ 
     ("W_CROSS_EAST", "W_NE_CORNER", "low", False, False, True),
     ("W_NE_CORNER", "W_NORTH_STADIUM", "low", False, False, True),
     ("W_NORTH_STADIUM", "W_NW_CORNER", "low", False, False, True),
     ("W_NW_CORNER", "N_CANTEEN_ENTRANCE", "medium", False, False, True),
     ("N_CANTEEN_ENTRANCE", "W_CROSS_WEST", "high", False, False, True),
 
-    # 3. Khu Đông Bắc (A1, A1 Garden, Bãi Xe A1, Nhà B, Nhà A)
     ("W_A_B", "N_A1_GARDEN", "low", False, False, True),
     ("N_A1_GARDEN", "N_A1_ENTRANCE", "low", False, False, True),
     ("W_NE_CORNER", "W_A1_ROAD", "low", False, False, True),
@@ -145,14 +133,13 @@ HANU_EDGES_SPEC = [
     ("W_CROSS_EAST", "N_A_ENTRANCE", "medium", False, False, True),
     ("N_A1_GARDEN", "N_A_ENTRANCE", "low", False, False, True),
 
-    # 4. Khu Cổng, Souvenir & D1-D3
+
     ("N_GATE", "N_SOUVENIR", "low", False, False, True),
     ("W_A_B", "N_D1_ENTRANCE", "low", False, False, True),
     ("W_A_B", "N_D2_ENTRANCE", "low", False, False, True),
     ("W_A_B", "N_D3_ENTRANCE", "low", False, False, True),
     ("W_CROSS_EAST", "N_D3_ENTRANCE", "low", False, False, True),
 
-    # 5. Cụm D1-D3 & Tòa Nhà C
     ("W_CROSS_EAST", "W_SOUTH_EAST", "low", False, False, True),
     ("N_D3_ENTRANCE", "W_SOUTH_EAST", "low", False, False, True),
     ("N_D1_ENTRANCE", "N_D1_101", "low", False, True, True),
@@ -161,16 +148,16 @@ HANU_EDGES_SPEC = [
     ("W_SOUTH_EAST", "N_C_ENTRANCE", "low", False, False, True),
     ("N_D1_101", "N_C_ENTRANCE", "low", False, False, True),
 
-    # 6. Bên Trong Nhà C (CNTT)
+
     ("N_C_ENTRANCE", "N_C_101", "low", False, True, True),
-    # Cầu thang bộ tầng 1 -> 2
+
     ("N_C_ENTRANCE", "N_C_201", "low", True, True, False),
-    # Thang máy tầng 1 -> 2 (accessible)
+
     ("N_C_ENTRANCE", "N_C_201", "low", False, True, True),
-    # Cầu thang gác mái kỹ thuật (stairs-only, isolated -> S5 failure target)
+ 
     ("N_C_201", "N_C_ATTIC", "low", True, True, False),
 
-    # 7. Khu Trung Tâm (Quảng Trường Xanh, Thư Viện, Nhà E)
+
     ("W_CROSS_EAST", "N_GREEN_SQUARE", "low", False, False, True),
     ("W_SOUTH_STADIUM", "N_GREEN_SQUARE", "low", False, False, True),
     ("W_SOUTH_EAST", "N_GREEN_SQUARE", "low", False, False, True),
@@ -181,7 +168,7 @@ HANU_EDGES_SPEC = [
     ("N_LIB_ENTRANCE", "N_E_ENTRANCE", "low", False, False, True),
     ("N_E_ENTRANCE", "N_E_101", "low", False, True, True),
 
-    # 8. Sân Vận Động HANU
+ 
     ("W_CROSS_EAST", "N_STADIUM_EAST", "medium", False, False, True),
     ("W_SOUTH_STADIUM", "N_STADIUM_PITCH", "low", False, False, True),
     ("W_NORTH_STADIUM", "N_STADIUM_PITCH", "low", False, False, True),
@@ -189,7 +176,6 @@ HANU_EDGES_SPEC = [
     ("N_STADIUM_WEST", "N_STADIUM_PITCH", "low", False, False, True),
     ("N_STADIUM_WEST", "W_CROSS_WEST", "medium", False, False, True),
 
-    # 9. Cụm D4, D5, D6 & Bãi Đỗ Xe D4
     ("W_SOUTH_STADIUM", "N_D4_ENTRANCE", "low", False, False, True),
     ("N_D4_ENTRANCE", "N_D4_101", "low", False, True, True),
     ("N_D4_ENTRANCE", "N_D4_PARKING", "low", False, False, True),
@@ -204,7 +190,7 @@ HANU_EDGES_SPEC = [
     ("N_D6_ENTRANCE", "N_D6_101", "low", False, True, True),
     ("N_D5_101", "N_D6_ENTRANCE", "low", False, False, True),
 
-    # 10. Căn Tin & Khu Phía Tây (D7)
+   
     ("N_CANTEEN_ENTRANCE", "N_CANTEEN_HALL", "high", False, True, True),
     ("W_WEST_ALLEY", "N_D7_ENTRANCE", "low", False, False, True),
     ("N_D7_ENTRANCE", "N_D7_101", "low", False, True, True),
@@ -213,7 +199,7 @@ HANU_EDGES_SPEC = [
     ("W_WEST_ALLEY", "N_D7_PARKING", "low", False, False, True),
     ("N_D7_PARKING", "N_D5_101", "low", False, False, True),
 
-    # 11. Bên Trong Nhà A, A1, B
+
     ("N_B_ENTRANCE", "N_B_101", "low", False, True, True),
     ("N_A_ENTRANCE", "N_A_101", "low", False, True, True),
     ("N_A1_ENTRANCE", "N_A1_HALL", "medium", False, True, True),
@@ -402,10 +388,6 @@ def write_sha256sums(out_dir: Path, filenames: List[str]) -> None:
         fh.write("\n".join(lines) + "\n")
 
 
-# ---------------------------------------------------------------------------
-# Map Rendering (PIL with pure stdlib fallback)
-# ---------------------------------------------------------------------------
-
 def _render_with_pil(nodes: List[dict], edges: List[dict], out_path: Path, width: int = 1200, height: int = 900) -> bool:
     try:
         from PIL import Image, ImageDraw, ImageFont
@@ -445,45 +427,42 @@ def _render_with_pil(nodes: List[dict], edges: List[dict], out_path: Path, width
     except Exception:
         font_title = font_sub = font_large = font_med = font_small = font_label = ImageFont.load_default()
 
-    # Title & Subtitle
     draw.text((margin_x, 24), "HANU CAMPUS — WAYFINDING & ROUTE MAP", fill=(20, 50, 30), font=font_title)
     draw.text((margin_x, 56), "HANOI UNIVERSITY · TRƯỜNG ĐẠI HỌC HÀ NỘI", fill=(80, 105, 95), font=font_sub)
 
-    # Compass
+ 
     cx, cy = width - margin_x - 30, 42
     draw.text((cx - 6, cy - 24), "N", fill=(30, 30, 30), font=font_large)
     draw.line([(cx, cy + 18), (cx, cy - 6)], fill=(40, 40, 40), width=3)
     draw.polygon([(cx, cy - 14), (cx - 5, cy - 4), (cx + 5, cy - 4)], fill=(210, 40, 40))
 
-    # Buildings & Landmarks
-    # 1. A1 Parking
+
     draw.rounded_rectangle(to_rect(440, 410, 560, 465), radius=8, fill=(0, 190, 230), outline=(0, 150, 190), width=2)
     draw.text((to_px(500, 437)[0]-42, to_px(500, 437)[1]-7), "A1 PARKING", fill=(255, 255, 255), font=font_med)
 
-    # 2. A1
+
     draw.rounded_rectangle(to_rect(420, 335, 545, 385), radius=8, fill=(255, 255, 255), outline=(195, 205, 200), width=2)
     draw.text((to_px(482, 360)[0]-10, to_px(482, 360)[1]-7), "A1", fill=(40, 50, 45), font=font_large)
 
-    # 3. A1 Garden
+
     draw.rounded_rectangle(to_rect(440, 220, 520, 315), radius=8, fill=(215, 238, 210), outline=(175, 215, 165), width=2)
     draw.text((to_px(480, 267)[0]-35, to_px(480, 267)[1]-7), "A1 Garden", fill=(35, 90, 45), font=font_large)
 
-    # 4. Building A
+
     draw.rounded_rectangle(to_rect(395, 215, 430, 330), radius=8, fill=(255, 255, 255), outline=(195, 205, 200), width=2)
     draw.text((to_px(412, 272)[0]-6, to_px(412, 272)[1]-9), "A", fill=(40, 50, 45), font=font_large)
 
-    # 5. Building B
+
     draw.rounded_rectangle(to_rect(530, 220, 560, 320), radius=8, fill=(255, 255, 255), outline=(195, 205, 200), width=2)
     draw.text((to_px(545, 270)[0]-6, to_px(545, 270)[1]-9), "B", fill=(40, 50, 45), font=font_large)
 
-    # 6. HANU Gate Box & Souvenir
+
     draw.rectangle(to_rect(540, 180, 595, 212), fill=(255, 255, 255), outline=(30, 30, 30), width=3)
     draw.text((to_px(567, 196)[0]-22, to_px(567, 196)[1]-8), "HANU", fill=(20, 20, 20), font=font_large)
 
     draw.rounded_rectangle(to_rect(535, 80, 565, 170), radius=6, fill=(252, 190, 130), outline=(225, 155, 85), width=2)
     draw.text((to_px(550, 125)[0]-25, to_px(550, 125)[1]-10), "HANU\nSOUVENIR", fill=(110, 55, 15), font=font_small)
 
-    # 7. D1, D2, D3
     draw.rounded_rectangle(to_rect(500, 80, 530, 170), radius=6, fill=(195, 175, 220), outline=(160, 140, 190), width=2)
     draw.text((to_px(515, 125)[0]-8, to_px(515, 125)[1]-7), "D1", fill=(60, 40, 90), font=font_large)
 
@@ -493,11 +472,9 @@ def _render_with_pil(nodes: List[dict], edges: List[dict], out_path: Path, width
     draw.rounded_rectangle(to_rect(420, 80, 450, 170), radius=6, fill=(245, 150, 188), outline=(215, 120, 158), width=2)
     draw.text((to_px(435, 125)[0]-8, to_px(435, 125)[1]-7), "D3", fill=(95, 25, 65), font=font_large)
 
-    # 8. Building C (CNTT)
     draw.rounded_rectangle(to_rect(420, 15, 545, 68), radius=8, fill=(0, 215, 215), outline=(0, 175, 175), width=2)
     draw.text((to_px(482, 42)[0]-7, to_px(482, 42)[1]-9), "C", fill=(10, 65, 65), font=font_large)
 
-    # 9. HANU Stadium
     stadium_rect = to_rect(175, 220, 375, 345)
     draw.rounded_rectangle(stadium_rect, radius=22, fill=(195, 235, 180), outline=(135, 195, 120), width=3)
     track_rect = to_rect(190, 232, 360, 332)
@@ -506,7 +483,7 @@ def _render_with_pil(nodes: List[dict], edges: List[dict], out_path: Path, width
     draw.rectangle(field_rect, fill=(75, 185, 95), outline=(255, 255, 255), width=2)
     draw.text((to_px(275, 282)[0]-55, to_px(275, 282)[1]-8), "HANU STADIUM", fill=(255, 255, 255), font=font_large)
 
-    # 10. Green Square, Library, E
+
     draw.rounded_rectangle(to_rect(320, 135, 390, 180), radius=6, fill=(65, 175, 95), outline=(45, 145, 75), width=2)
     draw.text((to_px(355, 157)[0]-27, to_px(355, 157)[1]-11), "GREEN\nSQUARE", fill=(255, 255, 255), font=font_small)
 
@@ -516,7 +493,6 @@ def _render_with_pil(nodes: List[dict], edges: List[dict], out_path: Path, width
     draw.rounded_rectangle(to_rect(320, 25, 390, 68), radius=6, fill=(248, 212, 80), outline=(218, 182, 50), width=2)
     draw.text((to_px(355, 46)[0]-6, to_px(355, 46)[1]-9), "E", fill=(95, 75, 15), font=font_large)
 
-    # 11. D4, D4 Parking, D5, D6
     draw.rounded_rectangle(to_rect(235, 95, 275, 180), radius=6, fill=(248, 212, 80), outline=(218, 182, 50), width=2)
     draw.text((to_px(255, 137)[0]-8, to_px(255, 137)[1]-7), "D4", fill=(95, 75, 15), font=font_large)
 
@@ -529,11 +505,10 @@ def _render_with_pil(nodes: List[dict], edges: List[dict], out_path: Path, width
     draw.rounded_rectangle(to_rect(135, 25, 275, 75), radius=6, fill=(248, 212, 80), outline=(218, 182, 50), width=2)
     draw.text((to_px(205, 50)[0]-8, to_px(205, 50)[1]-7), "D6", fill=(95, 75, 15), font=font_large)
 
-    # 12. Canteen
+
     draw.rounded_rectangle(to_rect(90, 220, 140, 335), radius=8, fill=(255, 255, 255), outline=(195, 205, 200), width=2)
     draw.text((to_px(115, 277)[0]-17, to_px(115, 277)[1]-11), "CAN\nTEEN", fill=(40, 50, 45), font=font_large)
 
-    # 13. D7, Grocery, Parking
     draw.rounded_rectangle(to_rect(15, 305, 65, 345), radius=6, fill=(75, 180, 95), outline=(45, 140, 65), width=2)
     draw.text((to_px(40, 325)[0]-25, to_px(40, 325)[1]-11), "D7\nGROCERY", fill=(255, 255, 255), font=font_small)
 
@@ -543,7 +518,7 @@ def _render_with_pil(nodes: List[dict], edges: List[dict], out_path: Path, width
     draw.rounded_rectangle(to_rect(25, 25, 95, 95), radius=8, fill=(0, 195, 235), outline=(0, 155, 195), width=2)
     draw.text((to_px(60, 60)[0]-25, to_px(60, 60)[1]-11), "D7\nPARKING", fill=(255, 255, 255), font=font_small)
 
-    # Edges
+
     node_coords = {n["node_id"]: to_px(n["x"], n["y"]) for n in nodes}
     for e in edges:
         p1 = node_coords[e["source"]]
@@ -555,7 +530,7 @@ def _render_with_pil(nodes: List[dict], edges: List[dict], out_path: Path, width
         else:
             draw.line([p1, p2], fill=(50, 60, 70), width=4)
 
-    # Nodes with clean badges
+   
     type_colors = {
         "plaza": (225, 55, 40),
         "entrance": (35, 155, 60),
@@ -626,7 +601,7 @@ def _render_with_pil(nodes: List[dict], edges: List[dict], out_path: Path, width
         draw.rounded_rectangle(bg_rect, radius=2, fill=(255, 255, 255, 225), outline=(210, 215, 210), width=1)
         draw.text((tx, ty), nid, fill=(30, 35, 40), font=font_label)
 
-    # Legend
+    
     lx, ly = margin_x, height - 38
     draw.text((lx, ly), "LEGEND:", fill=(30, 30, 30), font=font_large)
     lx += 85
@@ -730,11 +705,6 @@ def render_campus_map(nodes: List[dict], edges: List[dict], path: Path) -> None:
     """Render schematic map of HANU campus."""
     if not _render_with_pil(nodes, edges, path):
         _render_fallback_png(nodes, edges, path)
-
-
-# ---------------------------------------------------------------------------
-# CLI
-# ---------------------------------------------------------------------------
 
 def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Generate Project 01 HANU campus route data.")
