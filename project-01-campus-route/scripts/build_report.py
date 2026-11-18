@@ -10,19 +10,19 @@ from typing import Dict, List
 import matplotlib
 
 matplotlib.use("Agg")
-import matplotlib.pyplot as plt  # noqa: E402
-from matplotlib.backends.backend_pdf import PdfPages  # noqa: E402
-from matplotlib.font_manager import FontProperties  # noqa: E402
-from matplotlib.lines import Line2D  # noqa: E402
-from matplotlib.text import Text  # noqa: E402
-import pandas as pd  # noqa: E402
+import matplotlib.pyplot as plt  
+from matplotlib.backends.backend_pdf import PdfPages  
+from matplotlib.font_manager import FontProperties 
+from matplotlib.lines import Line2D  
+from matplotlib.text import Text  
+import pandas as pd  
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "starter"))
 
-from graph import load_graph, load_scenarios  # noqa: E402
-import student_core as core  # noqa: E402
-import visuals  # noqa: E402
+from graph import load_graph, load_scenarios  
+import student_core as core 
+import visuals  
 
 PAGE_W, PAGE_H = 8.5, 11.0
 MARGIN = 0.72
