@@ -12,11 +12,11 @@ from typing import Dict, Iterable, List, Optional, Sequence, Tuple
 import matplotlib
 
 matplotlib.use("Agg")
-import matplotlib.pyplot as plt  # noqa: E402
-from matplotlib.lines import Line2D  # noqa: E402
+import matplotlib.pyplot as plt 
+from matplotlib.lines import Line2D  
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from graph import Graph  # noqa: E402
+from graph import Graph  
 
 BACKGROUND = "#fbfbfa"
 EDGE_COLOR = "#b9bec7"
@@ -159,7 +159,7 @@ def render_map(
         )
 
     ax.set_aspect("equal")
-    ax.invert_yaxis()  # north (increasing y) points up
+    ax.invert_yaxis() 
     ax.set_xticks([])
     ax.set_yticks([])
     for spine in ax.spines.values():
