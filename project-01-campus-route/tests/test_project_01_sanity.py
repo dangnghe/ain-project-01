@@ -19,7 +19,7 @@ STARTER_DIR = PROJECT_DIR / "starter"
 
 sys.path.insert(0, str(STARTER_DIR))
 
-import graph as graph_module  # noqa: E402
+import graph as graph_module 
 
 
 def _load_module(name: str, path: Path):
@@ -34,11 +34,6 @@ def _load_module(name: str, path: Path):
 
 
 student_core = _load_module("project01_student_core", STARTER_DIR / "student_core.py")
-
-
-# ---------------------------------------------------------------------------
-# Data files
-# ---------------------------------------------------------------------------
 
 
 def test_data_files_exist():
@@ -132,11 +127,6 @@ def test_sha256sums_match_committed_data():
         assert actual == expected[name], f"{name} does not match SHA256SUMS"
 
 
-# ---------------------------------------------------------------------------
-# Starter graph loader (no search allowed here)
-# ---------------------------------------------------------------------------
-
-
 def test_graph_loads_and_has_neighbors():
     g = graph_module.load_graph()
     summary = g.summary()
@@ -161,11 +151,6 @@ def test_graph_module_has_no_search_functions():
     defined = {name for name in dir(graph_module) if not name.startswith("_")}
     leaked = forbidden & defined
     assert not leaked, f"starter/graph.py must not define search functions: {leaked}"
-
-
-# ---------------------------------------------------------------------------
-# Starter core stubs (must be empty)
-# ---------------------------------------------------------------------------
 
 
 def test_student_core_stubs_raise_not_implemented():
