@@ -4,7 +4,6 @@ import json
 import time
 from pathlib import Path
 
-# Force UTF-8 output on Windows
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="utf-8", errors="replace")
 
@@ -60,7 +59,7 @@ for sc in scenarios:
         print(f"  Constraints: {json.dumps(constraints, ensure_ascii=False)}")
     print()
 
-    # ---- S4: heuristic comparison ----
+  
     if sc.get("heuristics"):
         print("  Heuristic comparison (A*):")
         for h_name in sc["heuristics"]:
@@ -69,8 +68,6 @@ for sc in scenarios:
             print(fmt_path(path))
         print()
         continue
-
-    # ---- S1, S2, S3, S5 ----
     path, expanded, elapsed, cost = run_astar(sc, "euclidean")
     if path is None:
         print("  Result: NO PATH FOUND ✓" if sc["class"] == "failure" else "  Result: ⚠ UNEXPECTED – no path found")
